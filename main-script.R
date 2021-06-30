@@ -460,17 +460,13 @@ comedy_audience_time_plot + geom_point() + geom_smooth(fill = NA)  +
 
 #---- How many movies for each genre?
 #---- How many comedy movies for each year/interval of years?
-#---- Histograms? 
+#---- Histograms? bar chart?
 
 myhistogram_comedy <- ggplot(data = comedy, aes(x = year_of_release)) 
 
 myhistogram_comedy +  geom_histogram(binwidth = 10)
 
 colnames(data_movie)
-
-myhistogram_genres <- ggplot(data = data_movie, aes(x = genres))
-
-myhistogram_genres + geom_bar()
 
 
 
