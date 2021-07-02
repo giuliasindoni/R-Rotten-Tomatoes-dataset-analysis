@@ -1,3 +1,5 @@
+setwd("/Users/Giulia/RottenTomatoes/")
+
 data_review <- read.csv("rotten_tomatoes_critic_reviews.csv", header = TRUE)
 
 data_movie <- read.csv("rotten_tomatoes_movies.csv", header = TRUE)
@@ -468,6 +470,42 @@ myhistogram_comedy +  geom_histogram(binwidth = 10)
 
 colnames(data_movie)
 
+#---- How are documentaries doing?
+
+data_movie$genre
+
+documentary <- comedy <- data_movie[(data_movie$genres == "Documentary, Special Interest" | data_movie$genres == "Action & Adventure, Documentary, Drama, Special Interest" |
+                                       data_movie$genres == "Documentary" |
+                                       data_movie$genres == "Documentary, Sports & Fitness" |
+                                       data_movie$genres == "Documentary, Musical & Performing Arts" |
+                                       data_movie$genres == "Comedy, Documentary" |
+                                       data_movie$genres == "Documentary, Musical & Performing Arts, Special Interest"|
+                                       data_movie$genres == "Art House & International, Documentary, Special Interest" |
+                                       data_movie$genres == "Documentary, Drama, Musical & Performing Arts, Special Interest"), ]
+       
+
+nrow(documentary)
+
+colnames(documentary)
+
+documentary_audience_plot <- ggplot(data = documentary, aes(x = year_of_release, y = audience_rating,
+                                                          alpha(I(0.5))))
+
+documentary_audience_plot + geom_point() + stat_smooth(fill = 'NA')
+
+#sorted_years_documentary <- sort(documentary$year_of_release)
+
+#documentary_2010_2020 <- sorted_years_documentary[500: length(sorted_years_documentary)]
+
+documentary_critics_plot <- ggplot(data = documentary, aes(x = year_of_release, y = tomatometer_rating,
+                                                            alpha(I(0.5))))
+
+documentary_critics_plot + geom_point() + stat_smooth(fill = 'NA')
 
 
+
+documentary_critics_audience_plot <- ggplot(data = documentary, aes(x = tomatometer_rating, y = audience_rating ,
+                                                           alpha(I(0.5))))
+
+documentary_critics_audience_plot + geom_point() + stat_smooth(fill = 'NA')
 
